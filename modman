@@ -1,0 +1,4 @@
+app/etc/modules/*                                   app/etc/modules/
+app/code/community/Auctane/Api                      app/code/community/Auctane/Api
+app/design/adminhtml/default/default/layout/*       app/design/adminhtml/default/default/layout/
+skin/adminhtml/default/default/auctaneapi           skin/adminhtml/default/default/auctaneapi

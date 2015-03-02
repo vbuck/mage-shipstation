@@ -1,0 +1,19 @@
+{
+    "name": "vbuck/auctane-shipstation",
+    "type": "magento-module",
+    "license": "MIT",
+    "homepage": "http://www.magentocommerce.com/magento-connect/shipstation.html",
+    "description": "ShipStation integration for Magento",
+    "authors": [
+        {
+            "name": "ShipStation"
+        },
+        {
+            "name": "Rick Buczynski",
+            "email": "me@rickbuczynski.com"
+        }
+    ],
+    "require": {
+        "magento-hackathon/magento-composer-installer": "*"
+    }
+}

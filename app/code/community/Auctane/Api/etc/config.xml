@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ * ShipStation
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@auctane.com so we can send you a copy immediately.
+ *
+ * @category   Shipping
+ * @package    Auctane_Api
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ -->
+<config>
+	<modules>
+		<Auctane_Api>
+			<version>1.3.26</version>
+		</Auctane_Api>
+	</modules>
+	<global>
+            <events>
+                <salesrule_validator_process>
+                    <observers>
+                        <auctaneapi_salesrule_process>
+                            <class>auctaneapi/observer</class>
+                            <method>salesruleProcess</method>
+                        </auctaneapi_salesrule_process>                       
+                    </observers>                     
+                </salesrule_validator_process>
+                <sales_convert_quote_to_order>
+                    <observers>
+                        <auctaneapi_quote_to_order>
+                            <class>auctaneapi/observer</class>
+                            <method>salesConvertQuoteToOrder</method>
+                        </auctaneapi_quote_to_order>
+                    </observers>
+                </sales_convert_quote_to_order>                   
+            </events> 
+		<helpers>
+			<auctaneapi>
+				<class>Auctane_Api_Helper</class>
+			</auctaneapi>
+		</helpers>
+		<models>
+			<auctaneapi>
+				<class>Auctane_Api_Model</class>
+				<resourceModel>auctaneapi_mysql4</resourceModel>
+			</auctaneapi>
+			<auctaneapi_mysql4>
+                            <class>Auctane_Api_Model_Mysql4</class>
+                            <entities>
+                                <order_discount>
+                                    <table>auctane_api_discounts</table>
+                                </order_discount>
+                            </entities>
+			</auctaneapi_mysql4>
+		</models>
+		<resources>
+			<!-- Adapters don't need to be specified in modern versions of Magento, but included here for compatibility -->
+			<auctaneapi_write>
+				<connection><use>core_write</use></connection>
+			</auctaneapi_write>
+			<auctaneapi_read>
+				<connection><use>core_read</use></connection>
+			</auctaneapi_read>
+                        <auctaneapi_setup>
+                            <setup>
+                                <module>Auctane_Api</module>
+                            </setup>
+                        </auctaneapi_setup>
+		</resources>
+		<fieldsets>
+			<sales_order>
+				<increment_id><auctaneapi>OrderNumber</auctaneapi></increment_id>
+				<created_at><auctaneapi>OrderDate</auctaneapi></created_at>
+				<status><auctaneapi>OrderStatus</auctaneapi></status>
+				<updated_at><auctaneapi>LastModified</auctaneapi></updated_at>
+				<shipping_description><auctaneapi>ShippingMethod</auctaneapi></shipping_description>
+				<grand_total><auctaneapi>OrderTotal</auctaneapi></grand_total>
+				<tax_amount><auctaneapi>TaxAmount</auctaneapi></tax_amount>
+				<shipping_amount><auctaneapi>ShippingAmount</auctaneapi></shipping_amount>
+				<!-- status_history_text & gift_message are provided by Auctane, it is not standard Magento -->
+				<status_history_text><auctaneapi>InternalNotes</auctaneapi></status_history_text>
+				<gift_message><auctaneapi>GiftMessage</auctaneapi></gift_message>
+				<!-- Change "gift" to "gift_message_available" to show when customer had the choice, even if they did not enter a message. -->
+				<gift><auctaneapi>Gift</auctaneapi></gift>
+			</sales_order>
+                        <base_sales_order>
+                            <increment_id><auctaneapi>OrderNumber</auctaneapi></increment_id>
+				<created_at><auctaneapi>OrderDate</auctaneapi></created_at>
+				<status><auctaneapi>OrderStatus</auctaneapi></status>
+				<updated_at><auctaneapi>LastModified</auctaneapi></updated_at>
+				<shipping_description><auctaneapi>ShippingMethod</auctaneapi></shipping_description>
+				<base_grand_total><auctaneapi>OrderTotal</auctaneapi></base_grand_total>
+				<base_tax_amount><auctaneapi>TaxAmount</auctaneapi></base_tax_amount>
+				<base_shipping_amount><auctaneapi>ShippingAmount</auctaneapi></base_shipping_amount>
+				<!-- status_history_text & gift_message are provided by Auctane, it is not standard Magento -->
+				<status_history_text><auctaneapi>InternalNotes</auctaneapi></status_history_text>
+				<gift_message><auctaneapi>GiftMessage</auctaneapi></gift_message>
+				<!-- Change "gift" to "gift_message_available" to show when customer had the choice, even if they did not enter a message. -->
+				<gift><auctaneapi>Gift</auctaneapi></gift>                             
+                        </base_sales_order> 
+			<sales_order_billing_address>
+				<name><auctaneapi>Name</auctaneapi></name>
+				<company><auctaneapi>Company</auctaneapi></company>
+				<telephone><auctaneapi>Phone</auctaneapi></telephone>
+				<email><auctaneapi>Email</auctaneapi></email>
+			</sales_order_billing_address>
+			<sales_order_shipping_address>
+				<name><auctaneapi>Name</auctaneapi></name>
+				<company><auctaneapi>Company</auctaneapi></company>
+				<telephone><auctaneapi>Phone</auctaneapi></telephone>
+				<street1><auctaneapi>Address1</auctaneapi></street1>
+				<street2><auctaneapi>Address2</auctaneapi></street2>
+				<city><auctaneapi>City</auctaneapi></city>
+				<region_code><auctaneapi>State</auctaneapi></region_code>
+				<postcode><auctaneapi>PostalCode</auctaneapi></postcode>
+				<country_id><auctaneapi>Country</auctaneapi></country_id>
+				<telephone><auctaneapi>Phone</auctaneapi></telephone>
+			</sales_order_shipping_address>
+			<sales_order_item>
+				<sku><auctaneapi>SKU</auctaneapi></sku>
+				<name><auctaneapi>Name</auctaneapi></name>
+				<weight><auctaneapi>Weight</auctaneapi></weight>
+				<qty_ordered><auctaneapi>Quantity</auctaneapi></qty_ordered>
+				<price><auctaneapi>UnitPrice</auctaneapi></price>
+				<!-- gift_message is provided by Auctane, it is not standard Magento -->
+				<gift><auctaneapi>Gift</auctaneapi></gift>
+				<gift_message><auctaneapi>GiftMessage</auctaneapi></gift_message>
+			</sales_order_item>
+                        <base_sales_order_item>
+				<sku><auctaneapi>SKU</auctaneapi></sku>
+				<name><auctaneapi>Name</auctaneapi></name>
+				<weight><auctaneapi>Weight</auctaneapi></weight>
+				<qty_ordered><auctaneapi>Quantity</auctaneapi></qty_ordered>
+				<base_price><auctaneapi>UnitPrice</auctaneapi></base_price>
+				<!-- gift_message is provided by Auctane, it is not standard Magento -->
+				<gift><auctaneapi>Gift</auctaneapi></gift>
+				<gift_message><auctaneapi>GiftMessage</auctaneapi></gift_message>
+			</base_sales_order_item>
+			<sales_order_item_product>
+				<!-- Any product attributes listed here will be output as order item fields -->
+				<!-- Note: Product attributes may change after an order is placed -->
+
+				<!-- image_url is a built in function, can also be small_image_url or thumbnail_url -->
+				<image_url><auctaneapi>ImageUrl</auctaneapi></image_url>
+				<!-- There are many product functions that can be used here such as:
+					category_id, category_ids, website_ids, formatted_price, url_path -->
+			</sales_order_item_product>
+			<sales_order_item_option>
+				<label><auctaneapi>Name</auctaneapi></label>
+				<value><auctaneapi>Value</auctaneapi></value>
+			</sales_order_item_option>
+		</fieldsets>
+		<catalog>
+			<product>
+				<type>
+					<!-- Specify any product types here to exclude them from export -->
+					<configurable>
+						<auctane_exclude>1</auctane_exclude>
+					</configurable>
+				</type>
+			</product>
+		</catalog>
+		<!-- The following node is only necessary for versions of Magento older than 1.3
+		<rewrite>
+			<auctaneapi>
+				<from><![CDATA[#^api/auctane/#]]></from>
+				<to>auctaneapi/auctane/</to>
+			</auctaneapi>
+		</rewrite>
+		-->
+	</global>
+	<adminhtml>
+		<layout>
+			<updates>
+				<auctaneapi>
+					<file>auctaneapi.xml</file>
+				</auctaneapi>
+			</updates>
+		</layout>
+		<acl>
+		    <resources>
+				<admin>
+				    <children>
+				        <system>
+		                	<children>
+		                		<config>
+		                			<children>
+			                			 <auctaneapi translate="title" module="auctaneapi">
+											<title>ShipStation</title>
+						                 </auctaneapi>
+		                			</children>
+		                		</config>
+							</children>
+						</system>
+				    </children>
+				</admin>
+		    </resources>
+		</acl>
+	</adminhtml>
+	<frontend>
+		<routers>
+			<!-- The following node is only necessary for versions of Magento older than 1.3
+			<auctaneapi>
+				<use>standard</use>
+				<args>
+					<module>Auctane_Api</module>
+					<frontName>auctanceapi</frontName>
+				</args>
+			</auctaneapi>
+			-->
+			<api>
+				<args>
+					<modules>
+						<auctaneapi before="Mage_Api">Auctane_Api</auctaneapi>
+					</modules>
+				</args>
+			</api>
+		</routers>
+	</frontend>
+	<default>
+		<auctaneapi>
+			<config>
+				<realm>Auctane ShipStation</realm>
+				<exportPageSize>100</exportPageSize>
+				<invoiceComment>Issued by Auctane ShipStation.</invoiceComment>
+                <export_price>1</export_price>
+                <import_discounts>1</import_discounts>
+                <import_child_products>1</import_child_products>
+			</config>
+		</auctaneapi>
+	</default>
+</config>

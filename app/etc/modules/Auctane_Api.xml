@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<config>
+    <modules>
+        <Auctane_Api>
+            <active>true</active>
+            <codePool>community</codePool>
+        </Auctane_Api>
+    </modules>
+</config>

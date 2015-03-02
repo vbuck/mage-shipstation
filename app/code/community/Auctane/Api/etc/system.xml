@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+ * ShipStation
+ *
+ * NOTICE OF LICENSE
+ *
+ * This source file is subject to the Open Software License (OSL 3.0)
+ * that is bundled with this package in the file LICENSE.txt.
+ * It is also available through the world-wide-web at this URL:
+ * http://opensource.org/licenses/osl-3.0.php
+ * If you did not receive a copy of the license and are unable to
+ * obtain it through the world-wide-web, please send an email
+ * to license@auctane.com so we can send you a copy immediately.
+ *
+ * @category   Shipping
+ * @package    Auctane_Api
+ * @license    http://opensource.org/licenses/osl-3.0.php  Open Software License (OSL 3.0)
+ -->
+<config>
+    <tabs>
+        <auctaneapi module="auctaneapi">
+            <label>shipstation</label>
+            <sort_order>120</sort_order>
+            <class>auctaneapi-header</class>
+        </auctaneapi>
+    </tabs>
+    <sections>
+        <auctaneapi translate="label" module="auctaneapi">
+            <class>auctaneapi-section</class>
+            <label>General Settings</label>
+            <header_css>auctaneapi-header</header_css>
+            <tab>auctaneapi</tab>
+            <sort_order>100</sort_order>
+            <show_in_default>1</show_in_default>
+            <show_in_website>1</show_in_website>
+            <show_in_store>1</show_in_store>
+            <groups>
+                <general translate="label">
+                    <label>General Settings</label>
+                    <frontend_type>text</frontend_type>
+                    <sort_order>0</sort_order>
+                    <show_in_default>1</show_in_default>
+                    <show_in_website>1</show_in_website>
+                    <show_in_store>1</show_in_store>
+                    <fields>                        
+                        <export_price translate="label">
+                            <label>Price export type</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>1</sort_order>
+                            <source_model>auctaneapi/system_source_config_prices</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </export_price> 
+                         <import_discounts translate="label">
+                            <label>Import Discounts</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>5</sort_order>
+                            <source_model>auctaneapi/system_source_config_import</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </import_discounts>
+                        <customattributes translate="label">
+                            <label>Export custom attributes as custom options</label>
+                            <frontend_type>multiselect</frontend_type>
+                            <source_model>auctaneapi/system_source_config_customattributes</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <sort_order>10</sort_order>
+                            <show_in_store>1</show_in_store>
+                        </customattributes>
+                        <import_child_products translate="label">
+                            <label>Import Child Products</label>
+                            <frontend_type>select</frontend_type>
+                            <sort_order>15</sort_order>
+                            <source_model>auctaneapi/system_source_config_import</source_model>
+                            <show_in_default>1</show_in_default>
+                            <show_in_website>1</show_in_website>
+                            <show_in_store>1</show_in_store>
+                        </import_child_products>
+                    </fields>
+                </general>
+            </groups>
+        </auctaneapi>
+    </sections>
+</config>
